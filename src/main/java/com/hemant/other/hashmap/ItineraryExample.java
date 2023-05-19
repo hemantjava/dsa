@@ -34,12 +34,12 @@ public class ItineraryExample {
         //Getting starting point from FROM which not present in To side
         String start = map.entrySet().stream().filter(e -> !map.values().contains(e.getKey()))
                 .map(Map.Entry::getKey).findAny().orElse("");
-        List<String> stringList = new ArrayList<>(map.size());
-        for (int i = 0; i <= map.size(); i++) {
+        List<String> stringList = new ArrayList<>(map.size());//added in list
+        for (int i = 0; i < map.size(); i++) {
             stringList.add(start);
             start = map.get(start);
         }
-
+        stringList.add(start);
         return stringList.stream().collect(Collectors.joining("===>"));
     }
 
