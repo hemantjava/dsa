@@ -47,31 +47,6 @@ public class BinarySearchTree {
 
     }
 
-    //Recursive call methods
-
-    public boolean rContains(int value) {
-        return rContains(rootNode, value);
-    }
-
-    private boolean rContains(Node node, int value) {
-        if (node == null) return false;
-        if (node.value == value) return true;
-        if (value < node.value) return rContains(node.left, value);
-        return rContains(node.right, value);
-    }
- public Node rInsert(int value){
-        return rInsert(rootNode, value);
- }
- private Node rInsert(Node node, int value) {
-        if (node == null) return new Node(value);
-        if (value < node.value) {
-            node.left = rInsert(node.left, value);
-        } else if (value > node.value) {
-            node.right = rInsert(node.right, value);
-        }
-        return node;
- }
-
     static class Node {
          int value;
          Node left;
