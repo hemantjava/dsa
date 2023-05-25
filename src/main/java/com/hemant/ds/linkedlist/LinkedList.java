@@ -3,127 +3,116 @@ package com.hemant.ds.linkedlist;
 public class LinkedList<T> {
 
     private Node<T> head;
-    private Node<T> tail;
     private int length;
+
+    public Node<T> getHead() {
+        return head;
+    }
 
     public LinkedList(T t) {
         final Node<T> newNode = getNewNode(t);
         head = newNode;
-        tail = newNode;
         length++;
     }
 
     public LinkedList() {
     }
 
+    public int size() {
+        return length;
+    }
+
+    public boolean isEmpty() {
+        return length == 0;
+    }
+
     @Override
     public String toString() {
         return "LinkedList{" +
                 "head=" + head +
-                ", tail=" + tail +
                 ", length=" + length +
                 '}';
     }
 
     public void printList() {
-        StringBuilder sb = new StringBuilder();
         if (length != 0) {
             Node<T> temp = head;
             while (temp != null) {
-                sb.append(temp.data).append(",");
-                temp = temp.nextNode;
+                System.out.print(temp.data + " ");
+                temp = temp.next;
             }
-            sb.deleteCharAt(sb.length() - 1);
         } else {
-            sb.append("[]");
+            System.out.print("[]");
         }
-        System.out.println(sb);
+        System.out.println();
     }
 
     //Extra auxiliary space O(n)
-    public void printRecursive(Node<T> headNode) {
+    private void printRecursive(Node<T> headNode) {
         if (headNode == null) {
             System.out.println();
             return;
         }
         System.out.print(headNode.data + " ");
-        printRecursive(headNode.nextNode);
+        printRecursive(headNode.next);
     }
 
     public void printRecursive() {
         printRecursive(head);
     }
 
-    public void append(T t) {
-        Node<T> newNode = getNewNode(t);
-        if (length == 0) {
-            head = newNode;
-        } else {
-            tail.nextNode = newNode;
-        }
-        tail = newNode; // now newNode became tail
-        length++;
-    }
-
-    public Node<T> removeLast() {
-        if (length == 0) return null;
-        Node<T> temp = head; //for last node
-        Node<T> pre = head;  // for second last node
-        while (temp.nextNode != null) {
-            pre = temp;  // end of loop pre become 2nd last node
-            temp = temp.nextNode;
-        }
-        tail = pre;
-        tail.nextNode = null;
-        length--;
-        if (length == 0) { // if LinkedList having 1 node
-            head = null;
-            tail = null;
-        }
-        return temp;
-    }
-
-    public void preAppend(T t) {
-        Node<T> newNode = getNewNode(t);
-        if (length == 0) {
-            tail = newNode;
-        } else {
-            newNode.nextNode = head;
-        }
-        head = newNode; // now newNode replaced head
-        length++;
-    }
 
     private Node<T> getNewNode(T t) {
         return new Node<>(t);
     }
 
-    public Node<T> removeFirst() {
-        Node<T> temp = head;
-        if (length == 0) return null;
-        else if (length == 1) {//if single node in LinkedList then tail also point to null
-            head = null;
-            tail = null;
-        } else {
-            head = temp.nextNode;
-            temp.nextNode = null;
+    public void preAppend(T t) {
+        Node<T> newNode = new Node<>(t);
+        if (isEmpty()) {
+            head = newNode;
+            length++;
+            return;
         }
-        length--;
-        return temp;
+        newNode.next = head;
+        head = newNode; // Head updated with new node
+        length++;
+    }
+
+    public void append(T t) {
+        Node<T> newNode = new Node<>(t);
+        if (isEmpty()) {
+            head = newNode;
+            length++;
+            return;
+        }
+        Node<T> temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
     }
 
     //get indexed node
-    public Node<T> get(int index) {
+    public Node<T> getNode(int index) {
         if (index < 0 || index >= length) return null;
         Node<T> temp = head;
         for (int i = 0; i < index; i++) {
-            temp = temp.nextNode; // temp indexed time
+            temp = temp.next; // temp indexed time
         }
         return temp;
     }
 
+    public T getData(int index) {
+        if (index < 0 || index >= length) return null;
+        Node<T> temp = head;
+        for (int i = 0; i < index; i++) {
+            temp = temp.next; // temp indexed time
+        }
+        return temp.data;
+    }
+
     public boolean set(int index, T value) {  //update operation
-        Node<T> temp = get(index); //get index value
+        Node<T> temp = getNode(index); //get index value
         if (temp != null) {
             temp.data = value; //updating indexed data
             return true;
@@ -131,68 +120,56 @@ public class LinkedList<T> {
         return false;
     }
 
-    public boolean insert(int index, T t) {
-        if (index < 0 || index > length) return false;
-        if (index == 0) {
-            preAppend(t);
-            return true;
+    public Node<T> deleteFirst() {
+        if (isEmpty()) {
+            return null;
         }
-        if (index == length) {
-            append(t);
-            return true;
-        }
-        Node<T> newNode = getNewNode(t);
-        Node<T> temp = get(index - 1); //take temp node just before the insertion node
-        newNode.nextNode = temp.nextNode;
-        temp.nextNode = newNode;
-        length++;
-        return true;
-    }
-
-    public Node<T> remove(int index) {
-        if (index < 0 || index >= length) return null;
-        if (index == 0) return removeFirst();
-        if (index == length - 1) return removeLast();
-        Node<T> prev = get(index - 1);
-        Node<T> temp = prev.nextNode; //get deleting node
-        prev.nextNode = temp.nextNode;
-        temp.nextNode = null;
+        Node<T> temp = head;
+        head = head.next;
         length--;
         return temp;
     }
 
-
-    public void reverse() {
-        //swapping from head to tell
-        Node<T> temp = head;
-        head = tail;
-        tail = temp;
-        Node<T> after;
-        Node<T> before = null;
-        for (int i = 0; i < length; i++) {
-            after = temp.nextNode;   //temp is tail
-            temp.nextNode = before;
-            before = temp;
-            temp = after;
+    public Node<T> deleteLast() {
+        if (isEmpty()) {
+            return null;
         }
+        Node<T> temp = getNode(size() - 2);
+        Node<T> delNode = temp.next;
+        temp.next = null;
+        length--;
+        return delNode;
+    }
+    void reverse() {
+        Node previous = null;
+        Node current = head;
+        Node next = null;
+
+        while (current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current; //head,current 2nd
+            current = next;
+        }
+
+        head = previous;
     }
 
-    static class Node<T> {
-        private T data;  // to hold data or value
-        private Node<T> nextNode; //to next node pointer
-
-        public Node(T data) {
-            this.data = data;
+    private Node reverseRecursion(Node node) {
+        if (node == null || node.next == null) {
+            return node;
         }
 
-        @Override
-        public String toString() {
-            return "Node{" +
-                    "data=" + data +
-                    ", nextNode=" + nextNode +
-                    '}';
-        }
+        Node reversedList = reverseRecursion(node.next);
+        node.next.next = node;
+        node.next = null;
 
+        return reversedList;
     }
+
+    void reverseRecursion() {
+        head = reverseRecursion(head);
+    }
+
 
 }

@@ -22,7 +22,7 @@ class LinkedListTest {
         list.append(5);
         list.printList();
         System.out.println("==================");
-        list.removeLast();
+        list.reverse();
         list.printList();
     }
 
@@ -41,7 +41,6 @@ class LinkedListTest {
        // list.append(5);
         list.printList();
         System.out.println("==================");
-        list.removeFirst();
         list.printList();
     }
 

@@ -1,7 +1,19 @@
 package com.hemant.other.hashmap;
 
 import java.util.*;
+/*
+       EXPECTED OUTPUT:
+       ----------------
+       1st set:
+       [[eat, tea, ate], [tan, nat], [bat]]
 
+       2nd set:
+       [[abc, cba, bac], [foo], [bar]]
+
+       3rd set:
+       [[listen, silent], [triangle, integral], [garden, ranged]]
+
+   */
 public class SameGroupOfCharacters {
     public static void main(String[] args) {
         System.out.println("1st set:");
@@ -12,20 +24,6 @@ public class SameGroupOfCharacters {
 
         System.out.println("\n3rd set:");
         System.out.println(groupAnagrams(new String[]{"listen", "silent", "triangle", "integral", "garden", "ranged"}));
-
-        /*
-            EXPECTED OUTPUT:
-            ----------------
-            1st set:
-            [[eat, tea, ate], [tan, nat], [bat]]
-
-            2nd set:
-            [[abc, cba, bac], [foo], [bar]]
-
-            3rd set:
-            [[listen, silent], [triangle, integral], [garden, ranged]]
-
-        */
 
     }
 

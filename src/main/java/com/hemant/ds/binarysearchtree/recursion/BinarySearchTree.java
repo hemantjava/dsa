@@ -9,8 +9,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private Node<T> insertRecursive(Node<T> root, T data) {
         if (root == null) {
-            root = new Node<>(data);
-            return root;
+            return new Node<>(data);
         }
 
         if (data.compareTo(root.data) < 0) {
@@ -142,6 +141,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         bst.preorderTraversal();
         System.out.println("\nminValue: "+bst.minValue());
         System.out.println("maxValue: "+bst.maxValue());
+        System.out.println("search 50:"+bst.search(50));
 
 
     }
