@@ -1,5 +1,10 @@
 package com.hemant.ds.binarysearchtree.recursion;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> root;
 
@@ -8,36 +13,29 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private Node<T> insertRecursive(Node<T> root, T data) {
-        if (root == null) {
+        if (root == null)
             return new Node<>(data);
-        }
-
-        if (data.compareTo(root.data) < 0) {
+        if (data.compareTo(root.data) < 0)
             root.left = insertRecursive(root.left, data);
-        } else if (data.compareTo(root.data) > 0) {
+        else if (data.compareTo(root.data) > 0)
             root.right = insertRecursive(root.right, data);
-        }
-
         return root;
     }
+
     public boolean search(T data) {
         return searchRecursive(root, data);
     }
 
     private boolean searchRecursive(Node<T> root, T data) {
-        if (root == null) {
+        if (root == null)
             return false;
-        }
-
-        if (data.compareTo(root.data) == 0) {
+        if (data.compareTo(root.data) == 0)
             return true;
-        } else if (data.compareTo(root.data) < 0) {
+        else if (data.compareTo(root.data) < 0)
             return searchRecursive(root.left, data);
-        } else {
-            return searchRecursive(root.right, data);
-        }
-    }
+        return searchRecursive(root.right, data);
 
+    }
 
     public void delete(T data) {
         root = deleteRecursive(root, data);
@@ -74,6 +72,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         return minValue;
     }
+
     public void inorderTraversal() {  // always sorted form data  -> left - root - right note:- root middle print data in middle
         inorderTraversalRecursive(root);
     }
@@ -110,27 +109,57 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public T minValue(){
+    public List<T> breadthFirstSearch(){
+        Queue<Node<T>> queue = new LinkedList<>(); //hold node
+        List<T> result = new ArrayList<>();//hold data
+        queue.add(root);
+        while (queue.size() > 0){
+            Node<T> currentNode = queue.remove();//dequeue
+            result.add(currentNode.data);
+            if (currentNode.left != null){
+                queue.add(currentNode.left);
+            }if (currentNode.right != null){
+                queue.add(currentNode.right);
+            }
+        }
+       return  result;
+    }
+
+    public T minValue() {
         return minValue(root);
     }
 
-    public T maxValue(){
+    public T maxValue() {
         return maxValue(root);
     }
 
     private T maxValue(Node<T> root) {
-       T maxValue = root.data;
-       while (root.right!= null) {
-           maxValue = root.right.data;
-           root = root.right;
-       }
-       return maxValue;
+        T maxValue = root.data;
+        while (root.right != null) {
+            maxValue = root.right.data;
+            root = root.right;
+        }
+        return maxValue;
+    }
+    class Node<T extends Comparable<T>> {
+        T data;
+        Node<T> left;
+        Node<T> right;
+
+        public Node(T data) {
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return "[" + data + "]";
+        }
     }
 
     public static void main(String[] args) {
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
-        int[] data = {50,30,70,20,40};
-        for (int val :data) {
+        int[] data = {50, 30, 70, 20, 40};
+        for (int val : data) {
             bst.insert(val);
         }
         System.out.println("Inorder Traversal:");
@@ -139,9 +168,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
         bst.postorderTraversal();
         System.out.println("\nPreorder Traversal:");
         bst.preorderTraversal();
-        System.out.println("\nminValue: "+bst.minValue());
-        System.out.println("maxValue: "+bst.maxValue());
-        System.out.println("search 50:"+bst.search(50));
+        System.out.println("\nminValue: " + bst.minValue());
+        System.out.println("maxValue: " + bst.maxValue());
+        System.out.println("search 50:" + bst.search(50));
+        System.out.println(bst.breadthFirstSearch());
 
 
     }

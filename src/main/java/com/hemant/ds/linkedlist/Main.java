@@ -19,6 +19,10 @@ public class Main {
         ll.printList();
         System.out.println(ll.deleteFirst().data);
         System.out.println(ll.deleteLast().data);
-        ll.printList();
+        ll.append(6);
+        ll.append(9);
+        ll.printList();//8469
+        System.out.println(ll.searchIndex(6));
+        System.out.println(ll.searchIndex(1));
     }
 }

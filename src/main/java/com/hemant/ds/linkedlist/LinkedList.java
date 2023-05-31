@@ -140,6 +140,7 @@ public class LinkedList<T> {
         length--;
         return delNode;
     }
+
     void reverse() {
         Node previous = null;
         Node current = head;
@@ -169,6 +170,18 @@ public class LinkedList<T> {
 
     void reverseRecursion() {
         head = reverseRecursion(head);
+    }
+
+    public int searchIndex(T data) {
+        Node<T> temp = head;
+        int index = 0;
+        while (temp.next != null) {
+            if (temp.data == data)
+                return index;
+            index++;
+            temp = temp.next;
+        }
+        return -1;
     }
 
 

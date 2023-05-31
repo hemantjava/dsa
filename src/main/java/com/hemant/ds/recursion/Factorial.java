@@ -14,9 +14,9 @@ public class Factorial {
 1    4 * factorial(3)
 
 Execution:- top to bottom
-    2*1 = 3
-    3*2 = 6
-    4*6 = 24  result
+    => 2 * 1 =2
+    => 3 * 2 =6
+    => 4 * 6 =24  result
 
         */
     }
