@@ -13,6 +13,10 @@ public class Main {
         System.out.println(queue.dequeue());
         System.out.println("=======dequeue()========== ");
         System.out.println(queue);
+        queue.enqueue('D');
+        queue.enqueue('Z');
+        queue.printQueue();
+        queue.reverseQueue();
         queue.printQueue();
 
     }

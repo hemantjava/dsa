@@ -1,5 +1,8 @@
 package com.hemant.ds.queue;
 
+
+import java.util.Stack;
+
 public class Queue<T> {
 
     private Node<T> first;
@@ -80,6 +83,21 @@ public class Queue<T> {
         }
         length--;
         return temp;
+    }
+
+    public boolean isEmpty(){
+        return length == 0;
+    }
+
+    public void reverseQueue(){
+        Stack<T> stack = new Stack<>();
+
+        while (!isEmpty()){
+            stack.push(dequeue().value);
+        }
+        while (!stack.isEmpty()){
+            enqueue(stack.pop());
+        }
     }
 
 
