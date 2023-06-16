@@ -252,3 +252,14 @@ This means that although the reference is copied, **both the original reference 
 in memory. Changes made to the object's state within the method will be reflected in the original object outside the method.
 This can sometimes create confusion and make it appear as though Java is using "call by reference," but in reality,
 it is still "call by value."
+
+Q)Create Immutable classes:-
+To create a custom immutable class in Java, you need to follow these steps:
+
+a)Declare the class as final to prevent inheritance and overriding of methods.
+b)Declare all instance variables as private and final to ensure they cannot be modified once assigned.
+c)Provide a constructor that initializes all the instance variables.
+d)Do not provide any setter methods to modify the instance variables.
+e)If necessary, provide getter methods to access the values of the instance variables.
+f)If the class contains mutable objects, ensure they are deeply copied or made immutable as well.
+e)Override the equals(), hashCode(), and toString() methods for proper object comparison and string representation.

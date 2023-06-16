@@ -2,7 +2,7 @@ package com.hemant.other.array;
 
 public class FindSecondMax {
     public static void main(String[] args) {
-        int[] array = {1,3,5,7,9,8,8};
+        int[] array = {1, 3, 5, 7, 9, 8, 8};
         System.out.println(getSecondMax(array));
     }
 
@@ -12,14 +12,15 @@ public class FindSecondMax {
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
 
-        for (int current: array) {
-            if (current > max){
+        for (int current : array) {
+            if (current > max) {
                 secondMax = max;
                 max = current;
-            }else if (current > secondMax && current != max){  //deduplicate number
+            } else if (current > secondMax && current != max) {  //deduplicate number
                 secondMax = current;
             }
         }
+        System.out.println(max + " == " + secondMax);
         return secondMax;
     }
 }
