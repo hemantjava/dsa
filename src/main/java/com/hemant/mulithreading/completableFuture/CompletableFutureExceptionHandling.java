@@ -18,7 +18,6 @@ public class CompletableFutureExceptionHandling {
         });
 
 
-
         try {
             String result = completableFuture.get(); // blocking call to get the result
             System.out.println("Result: " + result);
