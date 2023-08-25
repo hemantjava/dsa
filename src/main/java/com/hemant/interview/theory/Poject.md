@@ -1,7 +1,7 @@
                                                 =====Asking Questions in Interview=====
                                                 =======================================
  My current project is Text Extraction service(TES). And It is Based on Health care domain.
- Client: Kaiser Permanente(KP)
+ Client: Gaurdand health
  
 TES is a OCR based text extraction service it is basically extracting 
 data from Scanned pdf Document/TRF(Test Requisition Form)

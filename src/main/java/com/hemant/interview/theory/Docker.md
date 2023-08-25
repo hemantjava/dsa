@@ -1,6 +1,4 @@
-**1) What is Apache Kafka?**
-   Apache Kafka is a publish-subscribe messaging system developed by Apache written in Scala. 
-   It is a distributed, partitioned and replicated log service.
+
 
 **Mention what is the benefits of Apache Kafka over the traditional technique?**
 Fast: A single Kafka broker can serve thousands of clients by handling megabytes of reads and writes per second
