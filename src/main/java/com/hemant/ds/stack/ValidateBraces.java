@@ -1,5 +1,7 @@
 package com.hemant.ds.stack;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 public class ValidateBraces {
@@ -13,13 +15,16 @@ public class ValidateBraces {
     }
 
     private static String validate(String input) {
-        Stack<Character> q = new Stack<>();
+        Deque<Character> q = new ArrayDeque<>();
         for (Character c : input.toCharArray()) {
             if (c == '[' || c == '(' || c == '{')
                 q.push(c);
-            else if (c == ']' || c == ')' || c == '}') {
-                if (q.isEmpty() || !pair(q.pop(), c))
+            else {
+                if (q.isEmpty()){
                     return "UNBALANCED";
+                } else if (!pair(q.pop(),c)) {
+                    return "UNBALANCED";
+                }
             }
         }
         return q.isEmpty() ? "BALANCED" : "UNBALANCED";
